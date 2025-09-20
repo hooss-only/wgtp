@@ -6,11 +6,15 @@ const resetBtn = document.getElementById("resetBtn");
 const gameInput = document.getElementById("gameInput");
 const display = document.getElementById("display");
 
+const rouletteMode = document.getElementById("rouletteMode");
+
 let gameTitles = [];
 
 let selecting = false;
 
 let twinkleInterval = null;
+
+let rm = false;
 
 function addGame(title) {
         clearInterval(twinkleInterval);
@@ -74,14 +78,23 @@ function wait(ms) {
 
 let bulb = true
 function twinkle() {
-        if (bulb)
-                display.style.color = "yellow"
-        else
-                display.style.color = "red"
+        const selected = document.getElementsByClassName("selected")[0];
+        if (bulb) {
+                if (rm)
+                        selected.style.color = "yellow"
+                else
+                        display.style.color = "yellow"
+        } else {
+                if (rm)
+                        selected.style.color = "red"
+                else 
+                        display.style.color = "red"
+        }
         bulb = !bulb
 }
 
 async function select() {
+        rm = false;
         selecting = true;
         selBtn.disabled = true;
         addBtn.disabled = true;
@@ -91,6 +104,7 @@ async function select() {
         while (display.children.length > 1) {
                 let index = getRandomInt(0, display.children.length - 1);
                 const selected = display.children[index];
+                selected.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
                 selected.classList.add("selected");
 
@@ -116,8 +130,66 @@ async function select() {
         selecting = false;
 }
 
+async function selectRoulette() {
+        rm = true;
+        selecting = true;
+        selBtn.disabled = true;
+        addBtn.disabled = true;
+        clearBtn.disabled = true;
+
+        let waitingTime = 1000
+        let index = 0;
+        for (let i=0; i<10; i++) {
+                let popSound = new Audio("./assets/pop.wav");
+                popSound.play();
+                display.children[index].classList.add("selected");
+                display.children[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                await wait(waitingTime);
+                display.children[index].classList.remove("selected");
+                waitingTime /= 1.25;
+                index++;
+                if (index >= display.children.length) index = 0;
+        }
+        
+        let random = getRandomInt(45,45+display.children.length);
+        for (let i=0; i<random; i++) {
+                let popSound = new Audio("./assets/pop.wav");
+                popSound.play();
+                display.children[index].classList.add("selected");
+                display.children[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                await wait(waitingTime);
+                display.children[index].classList.remove("selected")
+                index++;
+                if (index >= display.children.length) index = 0;
+        }
+        
+        for (let i=0; i<10; i++) {
+                let popSound = new Audio("./assets/pop.wav");
+                popSound.play();
+                display.children[index].classList.add("selected");
+                display.children[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                await wait(waitingTime);
+                waitingTime *= 1.25;
+                display.children[index].classList.remove("selected");
+                index++;
+                if (index >= display.children.length) index = 0;
+        }
+        display.children[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        display.children[index].classList.add("selected")
+        let tadaSound = new Audio("./assets/tada.flac");
+        tadaSound.play();
+        twinkleInterval = setInterval(twinkle, 500);
+        
+        clearBtn.disabled = false;
+        resetBtn.disabled = false;
+        selecting = false;
+}
+
 selBtn.addEventListener("click", () => {
-        select();
+        if (rouletteMode.checked)
+                selectRoulette();
+        else
+                select();
 });
 
 gameInput.addEventListener("keydown", (event) => {
