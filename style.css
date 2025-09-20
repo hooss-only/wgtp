@@ -31,7 +31,6 @@ body {
         width: 100%;
         height: 300px;
         overflow: auto;
-        padding-left: 10px;
 
         font-family: galmuri9;
 }
@@ -81,7 +80,11 @@ button {
         cursor: pointer;
 }
 
-.grey {
+button:disabled {
+        background-color: darkred;
+}
+
+button.grey {
         width: 40px;
         height: 10px;
         border-radius: 10px;
@@ -89,7 +92,24 @@ button {
         transform: rotate(-45deg);
 }
 
+button.grey:disabled {
+        background-color: #555555;
+}
+
 .input-box {
         display: flex;
         align-items: center;
+}
+
+#display > div {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        padding: 10px;
+}
+
+#display > div > button {
+        width: 15px; 
+        height: 15px;
+        background-color: black;
 }

@@ -8,10 +8,24 @@ const display = document.getElementById("display");
 
 let gameTitles = [];
 
+let selecting = false;
+
 function addGame(title) {
-        const p = document.createElement("p");
-        p.innerText = title;
-        display.prepend(p);
+        const div = document.createElement("div");
+        const span = document.createElement("span");
+        span.innerText = title;
+        const deleteButton = document.createElement("button");
+        let index = gameTitles.indexOf(title);
+        deleteButton.addEventListener("click", () => {
+                if (selecting) return;
+                display.removeChild(div);
+                gameTitles.splice(index, 1);
+                selBtn.disabled = false;
+                addBtn.disabled = false;
+        });
+        div.appendChild(span);
+        div.appendChild(deleteButton);
+        display.prepend(div);
 }
 
 function getRandomInt(min, max) {
@@ -22,10 +36,10 @@ function getRandomInt(min, max) {
 
 addBtn.addEventListener("click", () => {
         const text = gameInput.value;
-        if (text.length < 0) return;
+        if (text.length <= 0) return;
         
-        addGame(text);
         gameTitles.push(text);
+        addGame(text);
 
         gameInput.value = "";
 });
@@ -36,6 +50,7 @@ clearBtn.addEventListener("click", () => {
         display.replaceChildren();
         selBtn.disabled = false;
         addBtn.disabled = false;
+        resetBtn.disabled = true;
 });
 
 resetBtn.addEventListener("click", () => {
@@ -46,6 +61,7 @@ resetBtn.addEventListener("click", () => {
         });
         selBtn.disabled = false;
         addBtn.disabled = false;
+        resetBtn.disabled = true;
 });
 
 function wait(ms) {
@@ -53,10 +69,10 @@ function wait(ms) {
 }
 
 async function select() {
+        selecting = true;
         selBtn.disabled = true;
         addBtn.disabled = true;
         clearBtn.disabled = true;
-        resetBtn.disabled = true;
         let timeToWait = 1000
         while (display.children.length > 1) {
                 let index = getRandomInt(0, display.children.length - 1);
@@ -71,6 +87,7 @@ async function select() {
         }
         clearBtn.disabled = false;
         resetBtn.disabled = false;
+        selecting = false;
 }
 
 selBtn.addEventListener("click", () => {
