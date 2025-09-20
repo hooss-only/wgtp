@@ -49,3 +49,47 @@ body {
         font-size: 30px;
         font-style: italic;
 }
+
+#gameInput {
+        margin-right: 10px;
+}
+
+.buttons {
+        margin-top: 30px;
+        display: flex
+}
+
+.btn-box {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 10px;
+}
+
+.btn-box > span {
+        color: blue;
+        margin-left: 30px;
+        transform: rotate(-45deg);
+}
+
+button {
+        all: unset;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: red;
+        cursor: pointer;
+}
+
+.grey {
+        width: 40px;
+        height: 10px;
+        border-radius: 10px;
+        background-color: grey;
+        transform: rotate(-45deg);
+}
+
+.input-box {
+        display: flex;
+        align-items: center;
+}
