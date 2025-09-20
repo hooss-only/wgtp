@@ -11,8 +11,7 @@ let gameTitles = [];
 function addGame(title) {
         const p = document.createElement("p");
         p.innerText = title;
-        display.appendChild(p);
-        gameTitles.push(title);
+        display.prepend(p);
 }
 
 function getRandomInt(min, max) {
@@ -26,6 +25,7 @@ addBtn.addEventListener("click", () => {
         if (text.length < 0) return;
         
         addGame(text);
+        gameTitles.push(text);
 
         gameInput.value = "";
 });
@@ -64,6 +64,8 @@ async function select() {
                 selected.classList.add("selected");
                 await wait(timeToWait);
                 display.removeChild(selected);
+                let popSound = new Audio("./assets/pop.wav");
+                popSound.play();
                 
                 timeToWait /= 1.2;
         }
