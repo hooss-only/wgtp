@@ -151,7 +151,7 @@ async function selectRoulette() {
                 if (index >= display.children.length) index = 0;
         }
         
-        let random = getRandomInt(45,45+display.children.length);
+        let random = getRandomInt(25,25+display.children.length);
         for (let i=0; i<random; i++) {
                 let popSound = new Audio("./assets/pop.wav");
                 popSound.play();
