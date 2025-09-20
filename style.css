@@ -1,0 +1,51 @@
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
+body {
+        margin: 0;
+}
+
+.container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+}
+
+.main-box {
+        background-color: #eff0e1;
+        border: 1px solid lightgrey;
+        border-radius: 10px 10px 40px 10px;
+        width: 500px;
+        height: 600px;
+        padding: 60px 20px 20px 20px;
+}
+
+.display-border {
+        background-color: lightgray;
+        border-radius: 10px 10px 30px 10px;
+        padding: 30px 60px 30px 100px;
+}
+
+#display {
+        background-color: #aade73;
+        width: 100%;
+        height: 300px;
+        overflow: auto;
+        padding-left: 10px;
+
+        font-family: galmuri9;
+}
+
+.selected {
+        color: red
+}
+
+.title {
+        color: blue
+}
+
+.title > strong {
+        font-weight: normal;
+        font-size: 30px;
+        font-style: italic;
+}
