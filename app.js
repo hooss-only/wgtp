@@ -10,7 +10,11 @@ let gameTitles = [];
 
 let selecting = false;
 
+let twinkleInterval = null;
+
 function addGame(title) {
+        clearInterval(twinkleInterval);
+        display.style.color = "black";
         const div = document.createElement("div");
         const span = document.createElement("span");
         span.innerText = title;
@@ -68,23 +72,45 @@ function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+let bulb = true
+function twinkle() {
+        if (bulb)
+                display.style.color = "yellow"
+        else
+                display.style.color = "red"
+        bulb = !bulb
+}
+
 async function select() {
         selecting = true;
         selBtn.disabled = true;
         addBtn.disabled = true;
         clearBtn.disabled = true;
+
         let timeToWait = 1000
         while (display.children.length > 1) {
                 let index = getRandomInt(0, display.children.length - 1);
                 const selected = display.children[index];
+
                 selected.classList.add("selected");
+
                 await wait(timeToWait);
+
                 display.removeChild(selected);
+
                 let popSound = new Audio("./assets/pop.wav");
                 popSound.play();
                 
                 timeToWait /= 1.2;
         }
+
+        await wait(1000);
+        let tadaSound = new Audio("./assets/tada.flac");
+        tadaSound.play();
+        display.style.color = "red";
+        bulb = true;
+        twinkleInterval = setInterval(twinkle, 500);
+
         clearBtn.disabled = false;
         resetBtn.disabled = false;
         selecting = false;
