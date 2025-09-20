@@ -137,21 +137,10 @@ async function selectRoulette() {
         addBtn.disabled = true;
         clearBtn.disabled = true;
 
-        let waitingTime = 1000
+        let waitingTime = 100
         let index = 0;
-        for (let i=0; i<10; i++) {
-                let popSound = new Audio("./assets/pop.wav");
-                popSound.play();
-                display.children[index].classList.add("selected");
-                display.children[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-                await wait(waitingTime);
-                display.children[index].classList.remove("selected");
-                waitingTime /= 1.25;
-                index++;
-                if (index >= display.children.length) index = 0;
-        }
         
-        let random = getRandomInt(25,25+display.children.length);
+        let random = getRandomInt(35,35+display.children.length);
         for (let i=0; i<random; i++) {
                 let popSound = new Audio("./assets/pop.wav");
                 popSound.play();
