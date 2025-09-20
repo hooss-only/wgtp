@@ -13,7 +13,8 @@ body {
 
 .main-box {
         background-color: #eff0e1;
-        border: 1px solid lightgrey;
+        border: 2px solid lightgrey;
+        box-shadow: 5px 5px 0px 0px lightgrey;
         border-radius: 10px 10px 40px 10px;
         width: 500px;
         height: 600px;
@@ -22,11 +23,13 @@ body {
 
 .display-border {
         background-color: lightgray;
+        border: 2px solid #b5b5b5;
         border-radius: 10px 10px 30px 10px;
         padding: 30px 60px 30px 100px;
 }
 
 #display {
+        border: 2px solid #89c25d;
         background-color: #aade73;
         width: 100%;
         height: 300px;
@@ -77,6 +80,7 @@ button {
         height: 30px;
         border-radius: 100%;
         background-color: red;
+        border: 2px solid darkred;
         cursor: pointer;
 }
 
@@ -89,6 +93,7 @@ button.grey {
         height: 10px;
         border-radius: 10px;
         background-color: grey;
+        border: 2px solid #555555;
         transform: rotate(-45deg);
 }
 
@@ -112,4 +117,5 @@ button.grey:disabled {
         width: 15px; 
         height: 15px;
         background-color: black;
+        border: none;
 }
