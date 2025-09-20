@@ -2,6 +2,7 @@ const addBtn = document.getElementById("addBtn");
 const selBtn = document.getElementById("selBtn");
 const clearBtn = document.getElementById("clearBtn");
 const resetBtn = document.getElementById("resetBtn");
+
 const gameInput = document.getElementById("gameInput");
 const display = document.getElementById("display");
 
@@ -34,6 +35,7 @@ clearBtn.addEventListener("click", () => {
         gameTitles = [];
         display.replaceChildren();
         selBtn.disabled = false;
+        addBtn.disabled = false;
 });
 
 resetBtn.addEventListener("click", () => {
@@ -43,6 +45,7 @@ resetBtn.addEventListener("click", () => {
                 addGame(title);
         });
         selBtn.disabled = false;
+        addBtn.disabled = false;
 });
 
 function wait(ms) {
@@ -64,7 +67,6 @@ async function select() {
                 
                 timeToWait /= 1.2;
         }
-        addBtn.disabled = false;
         clearBtn.disabled = false;
         resetBtn.disabled = false;
 }
