@@ -137,11 +137,10 @@ async function selectRoulette() {
         addBtn.disabled = true;
         clearBtn.disabled = true;
 
-        let waitingTime = 100
+        let waitingTime = getRandomInt(1, 50);
         let index = 0;
         
-        let random = getRandomInt(35,35+display.children.length);
-        for (let i=0; i<random; i++) {
+        while (waitingTime < 1000) {
                 let popSound = new Audio("./assets/pop.wav");
                 popSound.play();
                 display.children[index].classList.add("selected");
@@ -150,19 +149,9 @@ async function selectRoulette() {
                 display.children[index].classList.remove("selected")
                 index++;
                 if (index >= display.children.length) index = 0;
+                waitingTime *= 1.1;
         }
-        
-        for (let i=0; i<10; i++) {
-                let popSound = new Audio("./assets/pop.wav");
-                popSound.play();
-                display.children[index].classList.add("selected");
-                display.children[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-                await wait(waitingTime);
-                waitingTime *= 1.25;
-                display.children[index].classList.remove("selected");
-                index++;
-                if (index >= display.children.length) index = 0;
-        }
+
         display.children[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
         display.children[index].classList.add("selected")
         let tadaSound = new Audio("./assets/tada.flac");
